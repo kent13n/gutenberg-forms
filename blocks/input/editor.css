@@ -8,18 +8,62 @@
     padding: 0;
 }
 
+.wp-block-gutenberg-forms-input .flex-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wp-block-gutenberg-forms-input.label-inline {
+    display: flex;
+    align-items: center;
+}
+
+.wp-block-gutenberg-forms-input.label-inline > label {
+    margin-right: 15px;
+}
+
+.wp-block-gutenberg-forms-input .flex-group .to-confirm {
+    box-sizing: border-box;
+    border: none;
+    padding: 10px;
+    margin: 0;
+    display: inline-flex;
+    text-decoration: none;
+    color: #fff;
+    background-color: #dc9f96;
+    border-radius: 7px;
+    margin-left: 10px;
+    width: 100px;
+    min-width: 100px;
+    height: 56px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.wp-block-gutenberg-forms-input .flex-group .to-confirm:hover {
+    background-color: #c02e44;
+}
+
 .wp-block-gutenberg-forms-input .input-group {
     display: flex;
     height: 56px;
     border-radius: 7px !important;
     background-color: #fff;
     box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.04);
-    padding: 10px;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.wp-block-gutenberg-forms-input .input-group > input {
+.wp-block-gutenberg-forms-input .input-group .input-group-field {
     flex-grow: 1;
+    padding: 10px;
+}
+
+.wp-block-gutenberg-forms-input .input-group input {
+    height: 100%;
+    width: 100%;
     padding: 0 !important;
     margin: 0 !important;
     border: none !important;
@@ -27,6 +71,10 @@
     background-color: transparent !important;
     box-shadow: none !important;
     outline: none !important;
+}
+
+.wp-block-gutenberg-forms-input .input-group input[type="file"] {
+    position: relative;
 }
 
 .wp-block-gutenberg-forms-input .input-group > .input-suffix {
@@ -42,6 +90,9 @@
     align-items: center;
     justify-content: center;
     background-color: #dc9f96;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
 .wp-block-gutenberg-forms-input .input-group > .input-suffix > button:focus,
@@ -68,4 +119,106 @@ input[type="number"]::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+.wp-block-gutenberg-forms-input .file-label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    height: 56px;
+    width: 100%;
+    margin: 0;
+}
+
+.wp-block-gutenberg-forms-input .file-label:hover .file-custom:before {
+    background-color: #c02e44;
+}
+
+.wp-block-gutenberg-forms-input .file-label input[type="file"] {
+    margin: 0;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    appearance: none;
+    background-color: initial;
+    cursor: default;
+    align-items: baseline;
+    color: inherit;
+    text-overflow: ellipsis;
+    white-space-collapse: preserve;
+    text-wrap: nowrap;
+    text-align: start !important;
+    padding: initial;
+    border: initial;
+    overflow: hidden !important;
+}
+
+.wp-block-gutenberg-forms-input .file-custom {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 5;
+    height: 100%;
+    padding: 0.5rem 1rem;
+    line-height: 1.5;
+    color: #555;
+    background-color: #fff;
+    border-radius: 7px;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.04);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.file-custom:before {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    content: attr(data-browse);
+    height: 100%;
+    padding: 0.5rem 1rem;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #dc9f96;
+    border: none;
+    border-radius: 0 7px 7px 0;
+}
+
+.file-custom:after {
+    box-sizing: border-box;
+    content: attr(data-text);
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    height: 100%;
+}
+
+.label-image-button {
+    padding: 0;
+    margin: 0 0 24px 0 !important;
+    height: auto;
+}
+
+.label-image-title {
+    font-weight: 500;
+    margin-bottom: 8px !important;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 0;
+}
+
+.richtext-label {
+    padding: 6px 8px;
+    border: 1px solid #949494;
+    border-radius: 2px;
+    width: 100%;
+    margin-bottom: 24px;
 }

@@ -39,6 +39,7 @@ registerBlockType("gutenberg-forms/input", {
             },
         ];
 
+        console.log(attributes.minValue);
         return (
             <div className={className}>
                 {attributes.type !== "" && InputRender(attributes)}
@@ -97,6 +98,7 @@ registerBlockType("gutenberg-forms/input", {
                                 setAttributes({ name });
                             }}
                         />
+
                         <SelectControl
                             label="Type du champ:"
                             value={attributes.type}
@@ -105,6 +107,39 @@ registerBlockType("gutenberg-forms/input", {
                             }}
                             options={options}
                         />
+
+                        <TextControl
+                            label="Valeur par défaut:"
+                            value={attributes.defaultValue}
+                            onChange={(defaultValue) => {
+                                setAttributes({ defaultValue });
+                            }}
+                        />
+
+                        {attributes.type === "number" && (
+                            <>
+                                <__experimentalNumberControl
+                                    label="Min value:"
+                                    value={attributes.minValue}
+                                    onChange={(val) => {
+                                        val = val === "" ? null : parseInt(val) || 0;
+                                        setAttributes({
+                                            minValue: val,
+                                        });
+                                    }}
+                                />
+                                <__experimentalNumberControl
+                                    label="Max value:"
+                                    value={attributes.maxValue}
+                                    onChange={(val) => {
+                                        val = val === "" ? null : parseInt(val) || 0;
+                                        setAttributes({
+                                            maxValue: val,
+                                        });
+                                    }}
+                                />
+                            </>
+                        )}
                     </PanelBody>
                 </InspectorControls>
             </div>
@@ -133,6 +168,8 @@ function InputRender(attributes) {
                                     type={attributes.type}
                                     name={attributes.name}
                                     placeholder={attributes.addPlaceholder ? attributes.placeholder : ""}
+                                    value={attributes.defaultValue}
+                                    onChange={() => {}}
                                 />
                             </div>
                         </div>
@@ -146,17 +183,29 @@ function InputRender(attributes) {
             );
             break;
         case "number":
+            let inputAttributes = {
+                type: attributes.type,
+                name: attributes.name,
+                placeholder: attributes.addPlaceholder ? attributes.placeholder : "",
+                value: attributes.defaultValue,
+                onChange: () => {},
+            };
+
+            if (attributes.minValue !== null) {
+                console.log("min: " + attributes.minValue);
+                inputAttributes.min = attributes.minValue;
+            }
+
+            if (attributes.maxValue !== null) {
+                inputAttributes.max = attributes.maxValue;
+            }
             return (
                 <>
                     {LabelRender(attributes)}
                     <div className="flex-group">
                         <div className="input-group">
                             <div className="input-group-field">
-                                <input
-                                    type={attributes.type}
-                                    name={attributes.name}
-                                    placeholder={attributes.addPlaceholder ? attributes.placeholder : ""}
-                                />
+                                <input {...inputAttributes} />
                             </div>
                             <div className="input-suffix">
                                 <button className="input-button-plus" type="button">

@@ -7,6 +7,16 @@ document.addEventListener("click", function (evt) {
         var value = parseInt(input.value) || 0;
         if (element.classList.contains("input-button-plus")) value++;
         else value--;
+
+        if (input.getAttribute("max") && value > parseInt(input.getAttribute("max"))) {
+            value = parseInt(input.getAttribute("max"));
+        }
+
+        console.log("coucou");
+        if (input.getAttribute("min") && value < parseInt(input.getAttribute("min"))) {
+            value = parseInt(input.getAttribute("min"));
+        }
+
         input.value = value;
         clearValidated(input);
         return;
@@ -29,7 +39,9 @@ document.addEventListener("click", function (evt) {
     }
 
     // check lors du submit
-    var form = evt.target.closest("form");
+
+    var btn = evt.target.closest('input[type="submit"]');
+    var form = btn && btn.closest("form");
     var toCompletes = form && form.querySelectorAll(".to-confirm");
     if (toCompletes && toCompletes.length > 0) {
         let formValidated = true;

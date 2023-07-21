@@ -15,7 +15,10 @@ class InputBlock extends JSXBlock
         'placeholder' => ['type' => 'string', 'default' => ''],
         'addLabelImage' => ['type' => 'boolean', 'default' => false],
         'labelImage' => ['type' => 'string', 'default' => ''],
-        'labelInline' => ['type' => 'boolean', 'default' => false]
+        'labelInline' => ['type' => 'boolean', 'default' => false],
+        'minValue' => ['type' => 'number', 'default' => null],
+        'maxValue' => ['type' => 'number', 'default' => null],
+        'defaultValue' => ['type' => 'string', 'default' => '']
     ];
 
     public function InputRender(array $attributes, $html = '')

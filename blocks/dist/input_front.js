@@ -30,8 +30,8 @@ document.addEventListener("click", function (evt) {
 
     // check lors du submit
     var form = evt.target.closest("form");
-    var toCompletes = form.querySelectorAll(".to-confirm");
-    if (toCompletes.length > 0) {
+    var toCompletes = form && form.querySelectorAll(".to-confirm");
+    if (toCompletes && toCompletes.length > 0) {
         let formValidated = true;
 
         toCompletes.forEach(function (item) {
@@ -46,6 +46,7 @@ document.addEventListener("click", function (evt) {
             evt.preventDefault();
             evt.stopPropagation();
             console.log("le formulaire n'est pas validé");
+            form.querySelector(".wp-block-gutenberg-alert.not-validated").classList.add("show");
         }
     }
 });
@@ -53,7 +54,6 @@ document.addEventListener("click", function (evt) {
 function clearValidated(input) {
     var group = input.closest(".input-group");
     if (group && group.classList.contains("validated")) {
-        console.log("remove");
         group.classList.remove("validated");
         input.removeEventListener("input", clearValidated);
     }

@@ -9,6 +9,7 @@ registerBlockType("gutenberg-forms/form", {
     category: "gutenberg-forms",
     edit({ className, attributes, setAttributes }) {
         const blocks = ["gutenberg-forms/form", "gutenberg-forms/input"];
+        const { successMessage, errorMessage, formulaireNotValidated } = attributes;
 
         return (
             <div className={className}>
@@ -17,6 +18,32 @@ registerBlockType("gutenberg-forms/form", {
                     Mon formulaire
                     <InnerBlocks allowedBlocks={blocks} />
                 </form>
+
+                <InspectorControls>
+                    <PanelBody title="Settings" initialOpen={false}>
+                        <TextControl
+                            label="Message de succès"
+                            value={successMessage}
+                            onChange={(successMessage) => {
+                                setAttributes({ successMessage });
+                            }}
+                        />
+                        <TextControl
+                            label="Message erreur"
+                            value={errorMessage}
+                            onChange={(errorMessage) => {
+                                setAttributes({ errorMessage });
+                            }}
+                        />
+                        <TextControl
+                            label="Message erreur"
+                            value={formulaireNotValidated}
+                            onChange={(formulaireNotValidated) => {
+                                setAttributes({ formulaireNotValidated });
+                            }}
+                        />
+                    </PanelBody>
+                </InspectorControls>
             </div>
         );
     },

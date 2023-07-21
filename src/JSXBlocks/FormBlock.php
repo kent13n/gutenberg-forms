@@ -2,23 +2,51 @@
 
 namespace GutenbergForms\JSXBlocks;
 
+use PHP_CodeSniffer\Generators\HTML;
+
 class FormBlock extends JSXBlock
 {
     public string $name = 'form';
 
-    public array $attributes = [];
+    public array $attributes = [
+        'successMessage' => ['type' => 'string', 'default' => 'Le formulaire a bien été envoyé.'],
+        'errorMessage' => ['type' => 'string', 'default' => 'Une erreur est survenue. Veuillez corriger le formulaire.'],
+        'formulaireNotValidated' => ['type' => 'string', 'default' => 'Tous les champs requis n\'ont pas été validés.']
+    ];
 
     public function FormRender(array $attributes, $html = '')
     {
+        global $errors;
+        $errorMessage = '';
+        $successMessage = '';
+
+        if ($errors !== null && count($errors->errors) > 0) {
+            $errorMessage = <<<HTML
+                <div class="wp-block-gutenberg-alert error show">
+                    {$attributes['errorMessage']}
+                </div>
+            HTML;
+        } else if (isset($_POST['gutenberg-form'])) {
+            $successMessage = <<<HTML
+                <div class="wp-block-gutenberg-alert success show">
+                    {$attributes['successMessage']}
+                </div>
+            HTML;
+        }
+
         $wp_nonce_field = wp_nonce_field(-1, '_wpnonce', true, false);
         return <<<HTML
             <div class="gutenberg-forms">
                 <form action method="post">
-                    coucou les amis
+                    {$errorMessage}
+                    {$successMessage}
+                    <div class="wp-block-gutenberg-alert error not-validated">
+                        {$attributes['formulaireNotValidated']}
+                    </div>
                     <input type="hidden" name="gutenberg-form" value="1">
                     {$wp_nonce_field}
                     {$html}
-                    <input type="submit" value="envoyer">
+                    <input class="gutenberg-forms-submit" type="submit" value="envoyer">
                 </form>
             </div>
         HTML;

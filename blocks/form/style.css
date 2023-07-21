@@ -5,5 +5,32 @@
  */
 
 .wp-block-gutenberg-forms-form {
-	padding: 0;
+    padding: 0;
+}
+
+.wp-block-gutenberg-alert {
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    opacity: 0.83;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+	display: none;
+}
+
+.wp-block-gutenberg-alert.show {
+	display: block;
+}
+
+.wp-block-gutenberg-alert.success {
+    background-color: #04aa6d;
+}
+
+.wp-block-gutenberg-alert.info {
+    background-color: #2196f3;
+}
+
+.wp-block-gutenberg-alert.warning {
+    background-color: #ff9800;
 }

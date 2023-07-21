@@ -50,10 +50,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-	font-size: 20px;
-	line-height: 24px;
-	color: #fff;
-	font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+    font-weight: 800;
 }
 
 .wp-block-gutenberg-forms-input .flex-group .to-confirm {
@@ -88,6 +88,10 @@
     box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.04);
     padding: 0;
     box-sizing: border-box;
+}
+
+.wp-block-gutenberg-forms-input .input-group.validated {
+    border: 1px solid #28ce42;
 }
 
 .wp-block-gutenberg-forms-input .input-group .input-group-field {

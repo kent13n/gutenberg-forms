@@ -22,12 +22,21 @@ class JSXBlock
             return false;
         }
 
-        wp_register_script(
-            $this->name,
-            $this->uri . "/dist/{$this->name}.js",
-            $this->components,
-            filemtime("{$this->dir}/dist/{$this->name}.js")
-        );
+        if (is_admin()) {
+            wp_register_script(
+                $this->name,
+                $this->uri . "/dist/{$this->name}.js",
+                $this->components,
+                filemtime("{$this->dir}/dist/{$this->name}.js")
+            );
+        } else if (!is_admin() && file_exists("{$this->dir}/dist/{$this->name}_front.js")) {
+            wp_enqueue_script(
+                "{$this->name}-viewscript",
+                $this->uri . "/dist/{$this->name}_front.js",
+                [],
+                filemtime("{$this->dir}/dist/{$this->name}_front.js")
+            );
+        }
 
         wp_register_style(
             "{$this->name}-editor",

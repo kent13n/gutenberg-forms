@@ -159,10 +159,10 @@ function InputRender(attributes) {
                                 />
                             </div>
                             <div className="input-suffix">
-                                <button type="button" onClick={Increment}>
+                                <button className="input-button-plus" type="button">
                                     +
                                 </button>
-                                <button type="button" onClick={Decrement}>
+                                <button className="input-button-minus" type="button">
                                     -
                                 </button>
                             </div>
@@ -200,14 +200,6 @@ function InputRender(attributes) {
             break;
     }
     return "";
-}
-
-function Increment() {
-    alert("+");
-}
-
-function Decrement() {
-    alert("-");
 }
 
 function AdminLabelImageRender(attributes, setAttributes) {

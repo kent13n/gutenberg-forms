@@ -12,7 +12,6 @@ document.addEventListener("click", function (evt) {
             value = parseInt(input.getAttribute("max"));
         }
 
-        console.log("coucou");
         if (input.getAttribute("min") && value < parseInt(input.getAttribute("min"))) {
             value = parseInt(input.getAttribute("min"));
         }

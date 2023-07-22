@@ -39,7 +39,6 @@ registerBlockType("gutenberg-forms/input", {
             },
         ];
 
-        console.log(attributes.minValue);
         return (
             <div className={className}>
                 {attributes.type !== "" && InputRender(attributes)}
@@ -149,7 +148,7 @@ registerBlockType("gutenberg-forms/input", {
         if (typeof className !== "string") className = "";
         if (attributes.labelInline) className += " label-inline";
         if (attributes.addLabelImage && attributes.labelImage !== "") className += " label-image";
-        return <div className={className + " aze"}>{attributes.type !== "" && InputRender(attributes)}</div>;
+        return <div className={className}>{attributes.type !== "" && InputRender(attributes)}</div>;
     },
 });
 
@@ -192,7 +191,6 @@ function InputRender(attributes) {
             };
 
             if (attributes.minValue !== null) {
-                console.log("min: " + attributes.minValue);
                 inputAttributes.min = attributes.minValue;
             }
 

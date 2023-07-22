@@ -54,6 +54,9 @@
     line-height: 24px;
     color: #fff;
     font-weight: 800;
+    text-align: center;
+    width: 100%;
+    margin: 0;
 }
 
 .wp-block-gutenberg-forms-input .flex-group .to-confirm {

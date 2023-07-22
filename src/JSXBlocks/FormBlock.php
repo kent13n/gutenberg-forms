@@ -27,12 +27,14 @@ class FormBlock extends JSXBlock
             $errorMessage = <<<HTML
                 <div class="wp-block-gutenberg-alert error show">
                     {$attributes['errorMessage']}
+                    <span class="closebtn">×</span>
                 </div>
             HTML;
         } else if (isset($_POST['gutenberg-form'])) {
             $successMessage = <<<HTML
                 <div class="wp-block-gutenberg-alert success show">
                     {$attributes['successMessage']}
+                    <span class="closebtn">×</span>
                 </div>
             HTML;
         }
@@ -49,6 +51,7 @@ class FormBlock extends JSXBlock
                     {$successMessage}
                     <div class="wp-block-gutenberg-alert error not-validated">
                         {$attributes['formulaireNotValidated']}
+                        <span class="closebtn">×</span>
                     </div>
                     <input type="hidden" name="gutenberg-form" value="1">
                     {$wp_nonce_field}

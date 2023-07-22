@@ -38,7 +38,6 @@ document.addEventListener("click", function (evt) {
     }
 
     // check lors du submit
-
     var btn = evt.target.closest('input[type="submit"]');
     var form = btn && btn.closest("form");
     var toCompletes = form && form.querySelectorAll(".to-confirm");
@@ -56,8 +55,21 @@ document.addEventListener("click", function (evt) {
         if (!formValidated) {
             evt.preventDefault();
             evt.stopPropagation();
-            form.querySelector(".wp-block-gutenberg-alert.not-validated").classList.add("show");
+            let alert = form.querySelector(".wp-block-gutenberg-alert.not-validated");
+            alert.classList.add("show");
+            alert.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
         }
+    }
+
+    // close alert
+    var close = evt.target.closest(".closebtn");
+    var alert = close && close.closest(".wp-block-gutenberg-alert");
+    if (close && alert && alert.classList.contains("show")) {
+        alert.classList.add("hide");
+        setTimeout(() => {
+            alert.classList.remove("hide");
+            alert.classList.remove("show");
+        }, 600);
     }
 });
 

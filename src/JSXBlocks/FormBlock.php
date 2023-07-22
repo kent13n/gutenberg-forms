@@ -12,6 +12,7 @@ class FormBlock extends JSXBlock
         'successMessage' => ['type' => 'string', 'default' => 'Le formulaire a bien été envoyé.'],
         'errorMessage' => ['type' => 'string', 'default' => 'Une erreur est survenue. Veuillez corriger le formulaire.'],
         'formulaireNotValidated' => ['type' => 'string', 'default' => 'Tous les champs requis n\'ont pas été validés.'],
+        'submitBtn' => ['type' => 'string', 'default' => 'Envoyer'],
         'maxWidth' => ['type' => 'number', 'default' => null]
     ];
 
@@ -52,7 +53,9 @@ class FormBlock extends JSXBlock
                     <input type="hidden" name="gutenberg-form" value="1">
                     {$wp_nonce_field}
                     {$html}
-                    <input class="gutenberg-forms-submit" type="submit" value="envoyer">
+                    <div class="text-center">
+                        <input class="gutenberg-forms-submit" type="submit" value="{$attributes['submitBtn']}">
+                    </div>
                 </form>
             </div>
         HTML;

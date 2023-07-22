@@ -278,7 +278,8 @@ function AdminLabelImageRender(attributes, setAttributes) {
             <MediaUpload
                 type="image"
                 onSelect={(image) => {
-                    setAttributes({ labelImage: image.sizes.full.url });
+                    let url = image.sizes.full.url.replace("http://", "//") || image.sizes.full.url;
+                    setAttributes({ labelImage: url });
                 }}
                 render={({ open }) => {
                     return (

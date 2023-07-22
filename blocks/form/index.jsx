@@ -8,8 +8,14 @@ registerBlockType("gutenberg-forms/form", {
     icon: "layout", // check icon here : https://developer.wordpress.org/resource/dashicons/
     category: "gutenberg-forms",
     edit({ className, attributes, setAttributes }) {
-        const blocks = ["gutenberg-forms/input", "gutenberg-forms/layout", "gutenberg-forms/separator", "core/paragraph", "core/heading"];
-        const { successMessage, errorMessage, formulaireNotValidated } = attributes;
+        const blocks = [
+            "gutenberg-forms/input",
+            "gutenberg-forms/layout",
+            "gutenberg-forms/separator",
+            "core/paragraph",
+            "core/heading",
+        ];
+        const { successMessage, errorMessage, formulaireNotValidated, submitBtn } = attributes;
         const style = getFormStyle(attributes);
 
         return (
@@ -17,6 +23,9 @@ registerBlockType("gutenberg-forms/form", {
                 <form method="post">
                     <input type="hidden" name="gutenberg-form" value="1" />
                     <InnerBlocks allowedBlocks={blocks} />
+                    <div className="text-center">
+                        <input className="gutenberg-forms-submit" type="submit" value={attributes.submitBtn} />
+                    </div>
                 </form>
 
                 <InspectorControls>
@@ -36,10 +45,17 @@ registerBlockType("gutenberg-forms/form", {
                             }}
                         />
                         <TextControl
-                            label="Message erreur"
+                            label="Message formulaire non validé"
                             value={formulaireNotValidated}
                             onChange={(formulaireNotValidated) => {
                                 setAttributes({ formulaireNotValidated });
+                            }}
+                        />
+                        <TextControl
+                            label="Bouton envoyé"
+                            value={submitBtn}
+                            onChange={(submitBtn) => {
+                                setAttributes({ submitBtn });
                             }}
                         />
                         <__experimentalNumberControl

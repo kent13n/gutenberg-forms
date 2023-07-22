@@ -6,6 +6,7 @@
 
 .wp-block-gutenberg-forms-input {
     padding: 0;
+    color: #fff;
 }
 
 .wp-block-gutenberg-forms-input .flex-group {
@@ -13,6 +14,13 @@
     justify-content: space-between;
     align-items: center;
     flex-grow: 1;
+}
+
+.wp-block-gutenberg-forms-input > label {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 12px;
 }
 
 .wp-block-gutenberg-forms-input.label-inline {
@@ -72,7 +80,7 @@
     margin-left: 10px;
     width: 100px;
     min-width: 100px;
-    height: 56px;
+    height: 70px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -85,7 +93,7 @@
 .wp-block-gutenberg-forms-input .input-group {
     display: flex;
     flex-grow: 1;
-    height: 56px;
+    height: 70px;
     border-radius: 7px !important;
     background-color: #fff;
     box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.04);
@@ -94,7 +102,7 @@
 }
 
 .wp-block-gutenberg-forms-input .input-group.validated {
-    border: 1px solid #28ce42;
+    border: 1px solid orange;
 }
 
 .wp-block-gutenberg-forms-input .input-group .input-group-field {
@@ -120,7 +128,7 @@
 }
 
 .wp-block-gutenberg-forms-input .input-group > .input-suffix > button {
-    height: 28px;
+    height: 35px;
     padding: 0 10px;
     margin: 0;
     display: inline-flex;
@@ -162,7 +170,7 @@ input[type="number"] {
     position: relative;
     display: inline-block;
     cursor: pointer;
-    height: 56px;
+    height: 70px;
     width: 100%;
     margin: 0;
 }
@@ -236,4 +244,14 @@ input[type="number"] {
     align-items: center;
     width: auto;
     height: 100%;
+}
+
+.wp-block-gutenberg-forms-input.small .file-label,
+.wp-block-gutenberg-forms-input.small .flex-group .to-confirm,
+.wp-block-gutenberg-forms-input.small .input-group {
+    height: 56px;
+}
+
+.wp-block-gutenberg-forms-input.small .input-group > .input-suffix > button {
+    height: 28px;
 }

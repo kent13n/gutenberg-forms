@@ -15,6 +15,18 @@ registerBlockType("gutenberg-forms/input", {
         if (typeof className !== "string") className = "";
         if (attributes.labelInline) className += " label-inline";
         if (attributes.addLabelImage && attributes.labelImage !== "") className += " label-image";
+        if (attributes.size && attributes.size !== "normal") className += " " + attributes.size;
+
+        const sizeOptions = [
+            {
+                value: "small",
+                label: "Small",
+            },
+            {
+                value: "normal",
+                label: "Normal",
+            },
+        ];
 
         const options = [
             {
@@ -99,6 +111,15 @@ registerBlockType("gutenberg-forms/input", {
                         />
 
                         <SelectControl
+                            label="Taille du champ:"
+                            value={attributes.size}
+                            onChange={(size) => {
+                                setAttributes({ size });
+                            }}
+                            options={sizeOptions}
+                        />
+
+                        <SelectControl
                             label="Type du champ:"
                             value={attributes.type}
                             onChange={(type) => {
@@ -148,6 +169,7 @@ registerBlockType("gutenberg-forms/input", {
         if (typeof className !== "string") className = "";
         if (attributes.labelInline) className += " label-inline";
         if (attributes.addLabelImage && attributes.labelImage !== "") className += " label-image";
+        if (attributes.size && attributes.size !== "normal") className += " " + attributes.size;
         return <div className={className}>{attributes.type !== "" && InputRender(attributes)}</div>;
     },
 });

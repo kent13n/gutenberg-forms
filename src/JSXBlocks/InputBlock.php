@@ -18,7 +18,8 @@ class InputBlock extends JSXBlock
         'labelInline' => ['type' => 'boolean', 'default' => false],
         'minValue' => ['type' => 'number', 'default' => null],
         'maxValue' => ['type' => 'number', 'default' => null],
-        'defaultValue' => ['type' => 'string', 'default' => '']
+        'defaultValue' => ['type' => 'string', 'default' => ''],
+        'size' => ['type' => 'string', 'default' => 'normal']
     ];
 
     public function InputRender(array $attributes, $html = '')

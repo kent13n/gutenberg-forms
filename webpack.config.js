@@ -1,14 +1,15 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
     entry: {
         // my blocks
-        'form': './blocks/form/index.jsx',
-        'input': './blocks/input/index.jsx',
+        form: "./blocks/form/index.jsx",
+        input: "./blocks/input/index.jsx",
+        layout: "./blocks/layout/index.jsx",
     },
     output: {
-        path: path.resolve(__dirname, 'blocks/dist'),
-        filename: '[name].js'
+        path: path.resolve(__dirname, "blocks/dist"),
+        filename: "[name].js",
     },
     module: {
         rules: [
@@ -16,12 +17,12 @@ module.exports = {
                 test: /.jsx?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader'
-                }
-            }
-        ]
+                    loader: "babel-loader",
+                },
+            },
+        ],
     },
     watchOptions: {
-        poll: 1000 // Mandatory for WSL
-    }
-}
+        poll: 1000, // Mandatory for WSL
+    },
+};

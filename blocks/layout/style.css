@@ -1,0 +1,60 @@
+/**
+ * The following styles get applied both on the front of your site and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-gutenberg-forms-layout {
+    padding: 0;
+    margin: 0 auto;
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    overflow: hidden; /* Hide the overflow */
+    position: relative;
+    grid-row-gap: 30px;
+    grid-column-gap: 45px;
+}
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.compact {
+    grid-row-gap: 15px;
+    grid-column-gap: 30px;
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid1 {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid > * {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    margin: 0;
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.enable-separator > *::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -22.5px; /* Half the gap */
+    height: 100vh; /* Big height*/
+    width: 1px;
+    background: #000;
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.enable-separator.compact > *::before {
+    right: -15px; /* Half the gap */
+}

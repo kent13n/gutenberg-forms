@@ -8,14 +8,14 @@ registerBlockType("gutenberg-forms/form", {
     icon: "layout", // check icon here : https://developer.wordpress.org/resource/dashicons/
     category: "gutenberg-forms",
     edit({ className, attributes, setAttributes }) {
-        const blocks = ["gutenberg-forms/form", "gutenberg-forms/input"];
+        const blocks = ["gutenberg-forms/input", "gutenberg-forms/layout", "core/paragraph", "core/heading"];
         const { successMessage, errorMessage, formulaireNotValidated } = attributes;
+        const style = getFormStyle(attributes);
 
         return (
-            <div className={className}>
+            <div className={className} style={style}>
                 <form method="post">
                     <input type="hidden" name="gutenberg-form" value="1" />
-                    Mon formulaire
                     <InnerBlocks allowedBlocks={blocks} />
                 </form>
 
@@ -42,6 +42,16 @@ registerBlockType("gutenberg-forms/form", {
                                 setAttributes({ formulaireNotValidated });
                             }}
                         />
+                        <__experimentalNumberControl
+                            label="Largeur max:"
+                            value={attributes.maxWidth}
+                            onChange={(val) => {
+                                val = val === "" ? null : parseInt(val) || 0;
+                                setAttributes({
+                                    maxWidth: val,
+                                });
+                            }}
+                        />
                     </PanelBody>
                 </InspectorControls>
             </div>
@@ -51,3 +61,11 @@ registerBlockType("gutenberg-forms/form", {
         return <InnerBlocks.Content />;
     },
 });
+
+function getFormStyle(attributes) {
+    const style = {};
+    if (attributes.maxWidth !== null && parseInt(attributes.maxWidth) !== NaN && parseInt(attributes.maxWidth) > 0) {
+        style.maxWidth = attributes.maxWidth + "px";
+    }
+    return style;
+}

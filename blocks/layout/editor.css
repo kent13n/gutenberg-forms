@@ -26,9 +26,14 @@
     grid-column-gap: 45px;
 }
 
-.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.compact .block-editor-block-list__layout {
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.small .block-editor-block-list__layout {
     grid-row-gap: 15px;
     grid-column-gap: 30px;
+}
+
+.wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.large .block-editor-block-list__layout {
+    grid-row-gap: 30px;
+    grid-column-gap: 90px;
 }
 
 .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid1 .block-editor-block-list__layout {
@@ -68,8 +73,15 @@
 }
 
 .wp-block-gutenberg-forms-layout
-    .gutenberg-forms-layout-grid.enable-separator.compact
+    .gutenberg-forms-layout-grid.enable-separator.small
     .block-editor-block-list__layout
     > *::before {
     right: -15px; /* Half the gap */
+}
+
+.wp-block-gutenberg-forms-layout
+    .gutenberg-forms-layout-grid.enable-separator.large
+    .block-editor-block-list__layout
+    > *::before {
+    right: -45px; /* Half the gap */
 }

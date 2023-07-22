@@ -1,6 +1,6 @@
 const { registerBlockType, createBlock } = wp.blocks;
 const { RichText, InspectorControls, MediaUpload, MediaUploadCheck, InnerBlocks } = wp.blockEditor;
-const { ColorPicker, PanelBody, TextControl, Button, __experimentalNumberControl, ToggleControl } = wp.components;
+const { ColorPicker, PanelBody, TextControl, Button, __experimentalNumberControl, ToggleControl, SelectControl } = wp.components;
 const { __ } = wp.i18n;
 const { dispatch, select } = wp.data;
 
@@ -9,9 +9,10 @@ registerBlockType("gutenberg-forms/layout", {
     icon: "layout", // check icon here : https://developer.wordpress.org/resource/dashicons/
     category: "gutenberg-forms",
     edit({ className, attributes, setAttributes, clientId }) {
-        const { separator, compact } = attributes;
+        const { separator } = attributes;
         const blocks = ["gutenberg-forms/input", "core/paragraph", "core/heading"];
         const gridClassName = getGridClassName(attributes);
+        const styleOptions = getStyleOptions();
 
         return (
             <div className={className}>
@@ -25,10 +26,13 @@ registerBlockType("gutenberg-forms/layout", {
                             checked={separator}
                             onChange={() => setAttributes({ separator: !separator })}
                         />
-                        <ToggleControl
-                            label="Mode compact"
-                            checked={compact}
-                            onChange={() => setAttributes({ compact: !compact })}
+                        <SelectControl
+                            label="Type du champ:"
+                            value={attributes.size}
+                            onChange={(size) => {
+                                setAttributes({ size });
+                            }}
+                            options={styleOptions}
                         />
                         <__experimentalNumberControl
                             label="Nombre de colonnes:"
@@ -77,12 +81,12 @@ function Render(attributes, edit = false) {
 }
 
 function getGridClassName(attributes) {
-    const { columns, separator, compact } = attributes;
+    const { columns, separator, compact, size } = attributes;
     let className = "gutenberg-forms-layout-grid";
     const nb_columns = parseInt(columns) !== NaN && parseInt(columns) > 0 ? parseInt(columns) : 1;
 
     if (separator) className += " enable-separator";
-    if (compact) className += " compact";
+    if (size) className += " " + size;
 
     switch (nb_columns) {
         case 1:
@@ -99,4 +103,21 @@ function getGridClassName(attributes) {
             break;
     }
     return className;
+}
+
+function getStyleOptions() {
+    return [
+        {
+            value: "small",
+            label: "Small",
+        },
+        {
+            value: "normal",
+            label: "Normal",
+        },
+        {
+            value: "large",
+            label: "Large",
+        },
+    ];
 }

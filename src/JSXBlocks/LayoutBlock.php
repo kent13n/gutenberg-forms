@@ -11,7 +11,8 @@ class LayoutBlock extends JSXBlock
         'rows' => ['type' => 'number', 'default' => 2],
         'separator' => ['type' => 'boolean', 'default' => false],
         'compact' => ['type' => 'boolean', 'default' => false],
-        'maxWidth' => ['type' => 'number', 'default' => null]
+        'maxWidth' => ['type' => 'number', 'default' => null],
+        'size' => ['type' => 'string', 'default' => 'normal']
     ];
 
     public function InputRender(array $attributes, $html = '')

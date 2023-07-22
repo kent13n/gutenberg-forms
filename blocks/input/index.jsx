@@ -1,9 +1,18 @@
 const { registerBlockType } = wp.blocks;
 const { RichText, InspectorControls, MediaUpload, MediaUploadCheck, InnerBlocks } = wp.blockEditor;
-const { ColorPicker, PanelBody, TextControl, Button, __experimentalNumberControl, SelectControl, ToggleControl } =
-    wp.components;
+const {
+    ColorPicker,
+    PanelBody,
+    TextControl,
+    Button,
+    __experimentalNumberControl,
+    SelectControl,
+    ToggleControl,
+    FormTokenField,
+} = wp.components;
 const { __ } = wp.i18n;
 const { useSelect } = wp.data;
+const { useState } = wp.element;
 
 registerBlockType("gutenberg-forms/input", {
     title: __("Input", "gutenberg-forms"),
@@ -16,6 +25,9 @@ registerBlockType("gutenberg-forms/input", {
         if (attributes.labelInline) className += " label-inline";
         if (attributes.addLabelImage && attributes.labelImage !== "") className += " label-image";
         if (attributes.size && attributes.size !== "normal") className += " " + attributes.size;
+
+        const rulesSuggestions = rulesOptions.map((item) => item.label);
+        const [selectedRules, setSelectedRules] = useState(attributes.rules.map((item) => item.label));
 
         const sizeOptions = [
             {
@@ -61,25 +73,21 @@ registerBlockType("gutenberg-forms/input", {
                             checked={labelInline}
                             onChange={() => setAttributes({ labelInline: !labelInline })}
                         />
-
                         <ToggleControl
                             label="Activer Confirmation"
                             checked={toConfirm}
                             onChange={() => setAttributes({ toConfirm: !toConfirm })}
                         />
-
                         <ToggleControl
                             label="Ajouter un placeholder"
                             checked={addPlaceholder}
                             onChange={() => setAttributes({ addPlaceholder: !addPlaceholder })}
                         />
-
                         <ToggleControl
                             label="Ajouter un label image"
                             checked={addLabelImage}
                             onChange={() => setAttributes({ addLabelImage: !addLabelImage })}
                         />
-
                         {addPlaceholder && (
                             <TextControl
                                 label="Placeholder:"
@@ -89,9 +97,7 @@ registerBlockType("gutenberg-forms/input", {
                                 }}
                             />
                         )}
-
                         {addLabelImage && AdminLabelImageRender(attributes, setAttributes)}
-
                         <h3 className="label-image-title">Label:</h3>
                         <RichText
                             className="richtext-label"
@@ -101,7 +107,6 @@ registerBlockType("gutenberg-forms/input", {
                                 setAttributes({ label });
                             }}
                         />
-
                         <TextControl
                             label="Nom du champ:"
                             value={attributes.name}
@@ -109,7 +114,6 @@ registerBlockType("gutenberg-forms/input", {
                                 setAttributes({ name });
                             }}
                         />
-
                         <SelectControl
                             label="Taille du champ:"
                             value={attributes.size}
@@ -118,7 +122,6 @@ registerBlockType("gutenberg-forms/input", {
                             }}
                             options={sizeOptions}
                         />
-
                         <SelectControl
                             label="Type du champ:"
                             value={attributes.type}
@@ -127,7 +130,6 @@ registerBlockType("gutenberg-forms/input", {
                             }}
                             options={options}
                         />
-
                         <TextControl
                             label="Valeur par défaut:"
                             value={attributes.defaultValue}
@@ -135,7 +137,6 @@ registerBlockType("gutenberg-forms/input", {
                                 setAttributes({ defaultValue });
                             }}
                         />
-
                         {attributes.type === "number" && (
                             <>
                                 <__experimentalNumberControl
@@ -160,6 +161,23 @@ registerBlockType("gutenberg-forms/input", {
                                 />
                             </>
                         )}
+
+                        <FormTokenField
+                            label="Règles de validation:"
+                            value={selectedRules}
+                            suggestions={rulesSuggestions}
+                            onChange={(val) => {
+                                let item = typeof val === "object" && val.length > 0 ? val[val.length - 1] : val;
+                                if (rulesSuggestions.includes(item)) {
+                                    setSelectedRules(val);
+                                    let rules = GetRulesFromLabels(val);
+                                    console.log(rules);
+                                    setAttributes({
+                                        rules,
+                                    });
+                                }
+                            }}
+                        />
                     </PanelBody>
                 </InspectorControls>
             </div>
@@ -315,3 +333,35 @@ function LabelRender(attributes) {
         return <>{attributes.label !== "" && <label htmlFor={attributes.name}>{attributes.label}</label>}</>;
     }
 }
+
+function GetRulesFromLabels(labels) {
+    let data = [];
+    if (typeof labels === "object" && labels.length > 0) {
+        for (const [key, label] of Object.entries(labels)) {
+            var result = rulesOptions.find((item) => item.label === label);
+            if (result) {
+                data.push(result);
+            }
+        }
+    }
+    return data;
+}
+
+const rulesOptions = [
+    {
+        value: "required",
+        label: "Requis",
+    },
+    {
+        value: "email",
+        label: "Email",
+    },
+    {
+        value: "number",
+        label: "Nombre",
+    },
+    {
+        value: "alphanumeric",
+        label: "Alphanumérique",
+    },
+];

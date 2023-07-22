@@ -11,6 +11,7 @@ class Main
         // add_action('enqueue_block_editor_assets', [$this, 'AdminAssets']);
         add_action('init', [$this, 'init']);
         add_filter('block_categories_all', [$this, 'AddCategory']);
+        add_action('wp', [$this, 'CheckForm']);
     }
 
     public function Init()
@@ -19,6 +20,10 @@ class Main
         (new JSXBlocks\InputBlock())->Register();
         (new JSXBlocks\LayoutBlock())->Register();
         (new JSXBlocks\SeparatorBlock())->Register();
+    }
+
+    public function CheckForm()
+    {
         Form::IsSubmitted();
     }
 

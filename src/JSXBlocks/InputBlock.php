@@ -19,7 +19,8 @@ class InputBlock extends JSXBlock
         'minValue' => ['type' => 'number', 'default' => null],
         'maxValue' => ['type' => 'number', 'default' => null],
         'defaultValue' => ['type' => 'string', 'default' => ''],
-        'size' => ['type' => 'string', 'default' => 'normal']
+        'size' => ['type' => 'string', 'default' => 'normal'],
+        'rules' => ['type' => 'array', 'default' => []]
     ];
 
     public function InputRender(array $attributes, $html = '')

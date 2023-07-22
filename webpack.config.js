@@ -6,6 +6,7 @@ module.exports = {
         form: "./blocks/form/index.jsx",
         input: "./blocks/input/index.jsx",
         layout: "./blocks/layout/index.jsx",
+        separator: "./blocks/separator/index.jsx",
     },
     output: {
         path: path.resolve(__dirname, "blocks/dist"),

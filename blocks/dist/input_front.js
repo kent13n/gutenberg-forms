@@ -56,7 +56,6 @@ document.addEventListener("click", function (evt) {
         if (!formValidated) {
             evt.preventDefault();
             evt.stopPropagation();
-            console.log("le formulaire n'est pas validé");
             form.querySelector(".wp-block-gutenberg-alert.not-validated").classList.add("show");
         }
     }

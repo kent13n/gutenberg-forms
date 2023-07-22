@@ -18,6 +18,7 @@ class Main
         (new JSXBlocks\FormBlock())->Register();
         (new JSXBlocks\InputBlock())->Register();
         (new JSXBlocks\LayoutBlock())->Register();
+        (new JSXBlocks\SeparatorBlock())->Register();
         Form::IsSubmitted();
     }
 

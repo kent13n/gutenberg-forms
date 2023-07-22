@@ -8,7 +8,7 @@ registerBlockType("gutenberg-forms/form", {
     icon: "layout", // check icon here : https://developer.wordpress.org/resource/dashicons/
     category: "gutenberg-forms",
     edit({ className, attributes, setAttributes }) {
-        const blocks = ["gutenberg-forms/input", "gutenberg-forms/layout", "core/paragraph", "core/heading"];
+        const blocks = ["gutenberg-forms/input", "gutenberg-forms/layout", "gutenberg-forms/separator", "core/paragraph", "core/heading"];
         const { successMessage, errorMessage, formulaireNotValidated } = attributes;
         const style = getFormStyle(attributes);
 

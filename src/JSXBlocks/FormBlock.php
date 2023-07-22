@@ -37,7 +37,7 @@ class FormBlock extends JSXBlock
         }
 
         if (isset($attributes['maxWidth']) && !is_null($attributes['maxWidth']) && $attributes['maxWidth'] > 0) {
-            $style = "max-width: {$attributes['maxWidth']}px;";
+            $style .= "max-width: {$attributes['maxWidth']}px;";
         }
 
         $wp_nonce_field = wp_nonce_field(-1, '_wpnonce', true, false);

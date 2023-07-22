@@ -64,7 +64,7 @@
     right: -22.5px; /* Half the gap */
     height: 100vh; /* Big height*/
     width: 1px;
-    background: #000;
+    background: #fff;
 }
 
 .wp-block-gutenberg-forms-layout

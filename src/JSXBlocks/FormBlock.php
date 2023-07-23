@@ -78,22 +78,40 @@ class FormBlock extends JSXBlock
     {
         global $errors;
         $value = esc_html($value);
+
         if (array_key_exists($name, $errors->errors)) {
-            $error = $errors->errors[$name];
-            $regex = "/(name=\"{$name}\" [^>]*)(value=\")\"(.*)(<\/div>)$/m";
-            $html_error = <<<HTML
-                <small class="error">{$error[0]}</small>
-            HTML;
-            if (preg_match($regex, $html, $matches)) {
-                $html = preg_replace($regex, "\${1} value=\"$value\" \${3} {$html_error}</div>", $html);
-            }
+            $html = self::AddErrorValue($name, $errors->errors[$name], $value, $html);
         } else {
-            $regex = "/(name=\"{$name}\" [^>]*)(value=\")\"(.*)(<\/div>)$/m";
-            if (preg_match($regex, $html, $matches)) {
-                $html = preg_replace($regex, "\${1} value=\"$value\" \${3}</div>", $html);
-            }
+            $html = self::AddValue($name, $value, $html);
         }
 
+        return $html;
+    }
+
+    private function AddErrorValue($name, $error, $value, $html)
+    {
+        $regexTextarea = "/(name=\"message\" [^>]*)>(.*)<\/textarea>(.*)(<\/div>)$/m";
+        $regex = "/(name=\"{$name}\" [^>]*)(value=\")\"(.*)(<\/div>)$/m";
+        $html_error = <<<HTML
+            <small class="error">{$error[0]}</small>
+        HTML;
+        if (preg_match($regex, $html)) {
+            $html = preg_replace($regex, "\${1} value=\"$value\" \${3} {$html_error}</div>", $html);
+        } else if (preg_match($regexTextarea, $html)) {
+            $html = preg_replace($regexTextarea, "\${1}>$value</textarea>\${3} {$html_error}</div>", $html);
+        }
+        return $html;
+    }
+
+    private function AddValue($name, $value, $html)
+    {
+        $regexTextarea = "/(name=\"message\" [^>]*)>(.*)<\/textarea>(.*)(<\/div>)$/m";
+        $regex = "/(name=\"{$name}\" [^>]*)(value=\")\"(.*)(<\/div>)$/m";
+        if (preg_match($regex, $html)) {
+            $html = preg_replace($regex, "\${1} value=\"$value\" \${3}</div>", $html);
+        } else if (preg_match($regexTextarea, $html)) {
+            $html = preg_replace($regexTextarea, "\${1}>$value</textarea>\${3}</div>", $html);
+        }
         return $html;
     }
 }

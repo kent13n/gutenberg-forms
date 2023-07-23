@@ -16,6 +16,7 @@ class InputBlock extends JSXBlock
         'addLabelImage' => ['type' => 'boolean', 'default' => false],
         'labelImage' => ['type' => 'string', 'default' => ''],
         'labelInline' => ['type' => 'boolean', 'default' => false],
+        'darkLabel' => ['type' => 'boolean', 'default' => false],
         'minValue' => ['type' => 'number', 'default' => null],
         'maxValue' => ['type' => 'number', 'default' => null],
         'defaultValue' => ['type' => 'string', 'default' => ''],

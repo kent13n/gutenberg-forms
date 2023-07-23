@@ -9,6 +9,10 @@
     color: #fff;
 }
 
+.wp-block-gutenberg-forms-input.label-dark {
+    color: #000;
+}
+
 .wp-block-gutenberg-forms-input .flex-group {
     display: flex;
     justify-content: space-between;

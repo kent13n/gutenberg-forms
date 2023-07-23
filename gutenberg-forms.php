@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Gutenberg Forms - Contact Forms Block
+ * Plugin Name:       Gutenberg Forms
  * Description:       Gutenberg Forms allows you to quickly and effortlessly create forms inside WordPress block editor.
  * Author:            Kent13n
  * Author URI         https://github.com/kent13n

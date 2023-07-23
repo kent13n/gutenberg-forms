@@ -19,10 +19,11 @@ registerBlockType("gutenberg-forms/input", {
     icon: "layout", // check icon here : https://developer.wordpress.org/resource/dashicons/
     category: "gutenberg-forms",
     edit({ className, attributes, setAttributes }) {
-        const { toConfirm, addPlaceholder, addLabelImage, labelInline } = attributes;
+        const { toConfirm, addPlaceholder, addLabelImage, labelInline, darkLabel } = attributes;
 
         if (typeof className !== "string") className = "";
         if (attributes.labelInline) className += " label-inline";
+        if (attributes.darkLabel) className += " label-dark";
         if (attributes.addLabelImage && attributes.labelImage !== "") className += " label-image";
         if (attributes.size && attributes.size !== "normal") className += " " + attributes.size;
 
@@ -61,6 +62,10 @@ registerBlockType("gutenberg-forms/input", {
                 value: "file",
                 label: "File",
             },
+            {
+                value: "textarea",
+                label: "Textarea",
+            },
         ];
 
         return (
@@ -68,6 +73,11 @@ registerBlockType("gutenberg-forms/input", {
                 {attributes.type !== "" && InputRender(attributes)}
                 <InspectorControls>
                     <PanelBody title="Settings" initialOpen={false}>
+                        <ToggleControl
+                            label="Dark label"
+                            checked={darkLabel}
+                            onChange={() => setAttributes({ darkLabel: !darkLabel })}
+                        />
                         <ToggleControl
                             label="Label inline"
                             checked={labelInline}
@@ -186,6 +196,7 @@ registerBlockType("gutenberg-forms/input", {
     save({ className, attributes }) {
         if (typeof className !== "string") className = "";
         if (attributes.labelInline) className += " label-inline";
+        if (attributes.darkLabel) className += " label-dark";
         if (attributes.addLabelImage && attributes.labelImage !== "") className += " label-image";
         if (attributes.size && attributes.size !== "normal") className += " " + attributes.size;
         return <div className={className}>{attributes.type !== "" && InputRender(attributes)}</div>;
@@ -281,6 +292,25 @@ function InputRender(attributes) {
                                 OK
                             </button>
                         )}
+                    </div>
+                </>
+            );
+            break;
+        case "textarea":
+            return (
+                <>
+                    {LabelRender(attributes)}
+                    <div className="flex-group">
+                        <div className="input-group textarea">
+                            <div className="input-group-field">
+                                <textarea
+                                    name={attributes.name}
+                                    placeholder={attributes.addPlaceholder ? attributes.placeholder : ""}
+                                    value={attributes.defaultValue}
+                                    onChange={() => {}}
+                                ></textarea>
+                            </div>
+                        </div>
                     </div>
                 </>
             );

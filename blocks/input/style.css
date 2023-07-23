@@ -9,6 +9,13 @@
     color: #fff;
 }
 
+.wp-block-gutenberg-forms-input small.error {
+    color: #992a22;
+    display: inline-block;
+    line-height: 18px;
+    margin-top: 10px;
+}
+
 .wp-block-gutenberg-forms-input .flex-group {
     display: flex;
     justify-content: space-between;

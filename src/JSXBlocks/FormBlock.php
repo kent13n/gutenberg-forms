@@ -2,18 +2,21 @@
 
 namespace GutenbergForms\JSXBlocks;
 
-use PHP_CodeSniffer\Generators\HTML;
+use GutenbergForms\Form;
 
 class FormBlock extends JSXBlock
 {
     public string $name = 'form';
 
     public array $attributes = [
+        'titleMessage' => ['type' => 'string', 'default' => 'Mon formulaire'],
         'successMessage' => ['type' => 'string', 'default' => 'Le formulaire a bien été envoyé.'],
         'errorMessage' => ['type' => 'string', 'default' => 'Une erreur est survenue. Veuillez corriger le formulaire.'],
         'formulaireNotValidated' => ['type' => 'string', 'default' => 'Tous les champs requis n\'ont pas été validés.'],
         'submitBtn' => ['type' => 'string', 'default' => 'Envoyer'],
-        'maxWidth' => ['type' => 'number', 'default' => null]
+        'maxWidth' => ['type' => 'number', 'default' => null],
+        'identifier' => ['type' => 'string', 'default' => null],
+        'destMail' => ['type' => 'string', 'default' => null]
     ];
 
     public function FormRender(array $attributes, $html = '')
@@ -23,7 +26,13 @@ class FormBlock extends JSXBlock
         $successMessage = '';
         $style = '';
 
-        if ($errors !== null && count($errors->errors) > 0) {
+        if ($errors !== null && $errors->has_errors()) {
+            foreach ($_POST as $name => $value) {
+                if (!in_array($name, Form::$itemsIgnored)) {
+                    $html = $this->AddError($name, $value, $html);
+                }
+            }
+
             $errorMessage = <<<HTML
                 <div class="wp-block-gutenberg-alert error show">
                     {$attributes['errorMessage']}
@@ -44,6 +53,7 @@ class FormBlock extends JSXBlock
         }
 
         $wp_nonce_field = wp_nonce_field(-1, '_wpnonce', true, false);
+
         return <<<HTML
             <div class="gutenberg-forms" style="{$style}">
                 <form action method="post">
@@ -53,7 +63,7 @@ class FormBlock extends JSXBlock
                         {$attributes['formulaireNotValidated']}
                         <span class="closebtn">×</span>
                     </div>
-                    <input type="hidden" name="gutenberg-form" value="1">
+                    <input type="hidden" name="gutenberg-form" value="{$attributes['identifier']}">
                     {$wp_nonce_field}
                     {$html}
                     <div class="text-center">
@@ -62,5 +72,28 @@ class FormBlock extends JSXBlock
                 </form>
             </div>
         HTML;
+    }
+
+    private function AddError($name, $value, $html)
+    {
+        global $errors;
+        $value = esc_html($value);
+        if (array_key_exists($name, $errors->errors)) {
+            $error = $errors->errors[$name];
+            $regex = "/(name=\"{$name}\" [^>]*)(value=\")\"(.*)(<\/div>)$/m";
+            $html_error = <<<HTML
+                <small class="error">{$error[0]}</small>
+            HTML;
+            if (preg_match($regex, $html, $matches)) {
+                $html = preg_replace($regex, "\${1} value=\"$value\" \${3} {$html_error}</div>", $html);
+            }
+        } else {
+            $regex = "/(name=\"{$name}\" [^>]*)(value=\")\"(.*)(<\/div>)$/m";
+            if (preg_match($regex, $html, $matches)) {
+                $html = preg_replace($regex, "\${1} value=\"$value\" \${3}</div>", $html);
+            }
+        }
+
+        return $html;
     }
 }

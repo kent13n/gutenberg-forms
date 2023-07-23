@@ -181,7 +181,6 @@ registerBlockType("gutenberg-forms/input", {
                                 if (rulesSuggestions.includes(item)) {
                                     setSelectedRules(val);
                                     let rules = GetRulesFromLabels(val);
-                                    console.log(rules);
                                     setAttributes({
                                         rules,
                                     });

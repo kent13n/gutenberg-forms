@@ -14,6 +14,8 @@
 
 defined('ABSPATH') || exit;
 
-require_once(plugin_dir_path(__FILE__) . 'vendor/autoload.php');
+if (!class_exists('GutenbergForms\Main')) {
+    require_once(plugin_dir_path(__FILE__) . 'vendor/autoload.php');
+}
 
 $plugin = new GutenbergForms\Main(__FILE__);

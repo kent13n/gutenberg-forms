@@ -130,6 +130,27 @@
 }
 
 /****** Media queries ***********/
+@media (min-width: 681px) {
+    .wp-block-gutenberg-forms-layout .order-1,
+    .wp-block-gutenberg-forms-layout .order-2,
+    .wp-block-gutenberg-forms-layout .order-3,
+    .wp-block-gutenberg-forms-layout .order-4,
+    .wp-block-gutenberg-forms-layout .order-5,
+    .wp-block-gutenberg-forms-layout .order-6,
+    .wp-block-gutenberg-forms-layout .order-7,
+    .wp-block-gutenberg-forms-layout .order-8,
+    .wp-block-gutenberg-forms-layout .order-9,
+    .wp-block-gutenberg-forms-layout .order-10,
+    .wp-block-gutenberg-forms-layout .order-11,
+    .wp-block-gutenberg-forms-layout .order-12,
+    .wp-block-gutenberg-forms-layout .order-13,
+    .wp-block-gutenberg-forms-layout .order-14,
+    .wp-block-gutenberg-forms-layout .order-15,
+    .wp-block-gutenberg-forms-input {
+        order: 0 !important;
+    }
+}
+
 /* Medium devices (tablets, less/equal than 992px) */
 @media (max-width: 992px) {
     .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid2,
@@ -139,7 +160,7 @@
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 680px) {
     .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid2,
     .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid3,
     .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid4 {

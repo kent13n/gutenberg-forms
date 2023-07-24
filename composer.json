@@ -1,5 +1,6 @@
 {
     "name": "kent13n/gutenberg-forms",
+    "type": "wordpress-plugin",
     "description": "Gutenberg Forms allows you to quickly and effortlessly create forms inside WordPress block editor.",
     "license": "MIT",
     "autoload": {
@@ -12,5 +13,12 @@
             "name": "kent13n"
         }
     ],
-    "require": {}
+    "require": {
+        "composer/installers": "^2.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
 }

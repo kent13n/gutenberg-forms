@@ -19,6 +19,7 @@ class InputBlock extends JSXBlock
         'darkLabel' => ['type' => 'boolean', 'default' => false],
         'minValue' => ['type' => 'number', 'default' => null],
         'maxValue' => ['type' => 'number', 'default' => null],
+        'order' => ['type' => 'number', 'default' => null],
         'defaultValue' => ['type' => 'string', 'default' => ''],
         'size' => ['type' => 'string', 'default' => 'normal'],
         'rules' => ['type' => 'array', 'default' => []]

@@ -68,3 +68,81 @@
 .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.enable-separator.large > *::before {
     right: -45px; /* Half the gap */
 }
+
+.wp-block-gutenberg-forms-layout .order-1 {
+    order: 1;
+}
+
+.wp-block-gutenberg-forms-layout .order-2 {
+    order: 2;
+}
+
+.wp-block-gutenberg-forms-layout .order-3 {
+    order: 3;
+}
+
+.wp-block-gutenberg-forms-layout .order-4 {
+    order: 4;
+}
+
+.wp-block-gutenberg-forms-layout .order-5 {
+    order: 5;
+}
+
+.wp-block-gutenberg-forms-layout .order-6 {
+    order: 6;
+}
+
+.wp-block-gutenberg-forms-layout .order-7 {
+    order: 7;
+}
+
+.wp-block-gutenberg-forms-layout .order-8 {
+    order: 8;
+}
+
+.wp-block-gutenberg-forms-layout .order-9 {
+    order: 9;
+}
+
+.wp-block-gutenberg-forms-layout .order-10 {
+    order: 10;
+}
+
+.wp-block-gutenberg-forms-layout .order-11 {
+    order: 11;
+}
+
+.wp-block-gutenberg-forms-layout .order-12 {
+    order: 12;
+}
+
+.wp-block-gutenberg-forms-layout .order-13 {
+    order: 13;
+}
+
+.wp-block-gutenberg-forms-layout .order-14 {
+    order: 14;
+}
+
+.wp-block-gutenberg-forms-layout .order-15 {
+    order: 15;
+}
+
+/****** Media queries ***********/
+/* Medium devices (tablets, less/equal than 992px) */
+@media (max-width: 992px) {
+    .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid2,
+    .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid3,
+    .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid2,
+    .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid3,
+    .wp-block-gutenberg-forms-layout .gutenberg-forms-layout-grid.grid4 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

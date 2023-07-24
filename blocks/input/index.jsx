@@ -68,8 +68,10 @@ registerBlockType("gutenberg-forms/input", {
             },
         ];
 
+        const style = GenerateStyle(attributes);
+
         return (
-            <div className={className}>
+            <div className={className} style={style}>
                 {attributes.type !== "" && InputRender(attributes)}
                 <InspectorControls>
                     <PanelBody title="Settings" initialOpen={false}>
@@ -172,6 +174,17 @@ registerBlockType("gutenberg-forms/input", {
                             </>
                         )}
 
+                        <__experimentalNumberControl
+                            label="Order:"
+                            value={attributes.order}
+                            onChange={(val) => {
+                                val = val === "" ? null : parseInt(val) || 0;
+                                setAttributes({
+                                    order: val,
+                                });
+                            }}
+                        />
+
                         <FormTokenField
                             label="Règles de validation:"
                             value={selectedRules}
@@ -198,9 +211,22 @@ registerBlockType("gutenberg-forms/input", {
         if (attributes.darkLabel) className += " label-dark";
         if (attributes.addLabelImage && attributes.labelImage !== "") className += " label-image";
         if (attributes.size && attributes.size !== "normal") className += " " + attributes.size;
-        return <div className={className}>{attributes.type !== "" && InputRender(attributes)}</div>;
+        const style = GenerateStyle(attributes);
+        return (
+            <div className={className} style={style}>
+                {attributes.type !== "" && InputRender(attributes)}
+            </div>
+        );
     },
 });
+
+function GenerateStyle(attributes) {
+    const style = {};
+    if (parseInt(attributes.order) !== NaN && parseInt(attributes.order) > 0) {
+        style.order = attributes.order.toString();
+    }
+    return style;
+}
 
 function InputRender(attributes) {
     switch (attributes.type) {

@@ -240,6 +240,7 @@ function InputRender(attributes) {
                         <div className="input-group">
                             <div className="input-group-field">
                                 <input
+                                    id={attributes.name}
                                     type={attributes.type}
                                     name={attributes.name}
                                     placeholder={attributes.addPlaceholder ? attributes.placeholder : ""}
@@ -259,6 +260,7 @@ function InputRender(attributes) {
             break;
         case "number":
             let inputAttributes = {
+                id: attributes.name,
                 type: attributes.type,
                 name: attributes.name,
                 placeholder: attributes.addPlaceholder ? attributes.placeholder : "",
@@ -305,7 +307,7 @@ function InputRender(attributes) {
                     {LabelRender(attributes)}
                     <div className="flex-group">
                         <label className="file-label">
-                            <input type={attributes.type} name={attributes.name} />
+                            <input id={attributes.name} type={attributes.type} name={attributes.name} />
                             <span
                                 className="file-custom"
                                 data-text={attributes.addPlaceholder ? attributes.placeholder : ""}
@@ -329,6 +331,7 @@ function InputRender(attributes) {
                         <div className="input-group textarea">
                             <div className="input-group-field">
                                 <textarea
+                                    id={attributes.name}
                                     name={attributes.name}
                                     placeholder={attributes.addPlaceholder ? attributes.placeholder : ""}
                                     value={attributes.defaultValue}
@@ -377,7 +380,7 @@ function LabelRender(attributes) {
         return (
             <>
                 <div className="label-image-group">
-                    <img src={attributes.labelImage} />
+                    <img src={attributes.labelImage} alt={attributes.label} />
                     {attributes.label !== "" && (
                         <label htmlFor={attributes.name} dangerouslySetInnerHTML={{ __html: attributes.label }}></label>
                     )}

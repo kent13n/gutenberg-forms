@@ -56,7 +56,7 @@ class FormBlock extends JSXBlock
 
         return <<<HTML
             <div class="gutenberg-forms" style="{$style}">
-                <form action method="post">
+                <form method="post">
                     {$errorMessage}
                     {$successMessage}
                     <div class="wp-block-gutenberg-alert error not-validated">
